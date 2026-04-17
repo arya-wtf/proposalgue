@@ -10,6 +10,9 @@ const admin = new Hono();
 
 // Auth middleware
 admin.use("/admin/*", async (c, next) => {
+  // Login page is always public (otherwise redirect loops on itself)
+  if (c.req.path === "/admin/login") return next();
+
   // In dev, allow without token
   if (env.NODE_ENV === "development" && !env.ADMIN_TOKEN) {
     return next();
