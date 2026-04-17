@@ -3,8 +3,10 @@ import { join } from "path";
 import { parseProposal } from "./parse-md";
 import type { ParsedProposal } from "./types";
 
-// proposals/ dir at project root — __dirname is src/lib/, so go up two levels
-const PROPOSALS_DIR = join(__dirname, "..", "..", "proposals");
+// proposals/ sits at the project root. Use process.cwd() so it works both in
+// dev (cwd = project root) and on Vercel (cwd = /var/task, bundled layout
+// flattens __dirname to /var/task/api which makes relative paths unreliable).
+const PROPOSALS_DIR = process.env.PROPOSALS_DIR || join(process.cwd(), "proposals");
 
 export async function loadProposal(slug: string): Promise<ParsedProposal> {
   // Sanitize slug to prevent path traversal
