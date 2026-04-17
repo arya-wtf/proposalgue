@@ -3,8 +3,8 @@ import { join } from "path";
 import { parseProposal } from "./parse-md";
 import type { ParsedProposal } from "./types";
 
-// proposals/ dir is at project root, resolved relative to CWD
-const PROPOSALS_DIR = join(process.cwd(), "proposals");
+// proposals/ dir at project root — __dirname is src/lib/, so go up two levels
+const PROPOSALS_DIR = join(__dirname, "..", "..", "proposals");
 
 export async function loadProposal(slug: string): Promise<ParsedProposal> {
   // Sanitize slug to prevent path traversal
