@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/styles.css",
+      "dest": "/public/styles.css"
+    },
+    {
+      "src": "/viewer.js",
+      "dest": "/public/viewer.js"
+    },
+    {
+      "src": "/signature_pad.min.js",
+      "dest": "/public/signature_pad.min.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.ts"
+    }
+  ],
+  "functions": {
+    "api/index.ts": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  }
+}
