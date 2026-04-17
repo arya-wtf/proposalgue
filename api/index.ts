@@ -1,2 +1,4 @@
+import { handle } from "hono/vercel";
 import app from "../src/app";
-export default app.fetch;
+
+export default handle(app);

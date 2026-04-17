@@ -14,16 +14,18 @@ if (!slug) {
 
 const baseUrl = process.env.PUBLIC_BASE_URL ?? "http://localhost:3000";
 
-try {
-  const proposal = await loadProposal(slug);
-  const fm = proposal.frontmatter;
-  const token = await generateShareToken(slug, fm.expires_at);
-  const link = `${baseUrl}/p/${slug}?t=${token}`;
-  console.log(`\nProposal: ${fm.title}`);
-  console.log(`Client:   ${fm.client.contact} <${fm.client.email}>`);
-  console.log(`Expires:  ${fm.expires_at}`);
-  console.log(`\nShare link:\n${link}\n`);
-} catch (e: any) {
-  console.error(`Error: ${e.message}`);
-  process.exit(1);
-}
+(async () => {
+  try {
+    const proposal = await loadProposal(slug as string);
+    const fm = proposal.frontmatter;
+    const token = await generateShareToken(slug as string, fm.expires_at);
+    const link = `${baseUrl}/p/${slug}?t=${token}`;
+    console.log(`\nProposal: ${fm.title}`);
+    console.log(`Client:   ${fm.client.contact} <${fm.client.email}>`);
+    console.log(`Expires:  ${fm.expires_at}`);
+    console.log(`\nShare link:\n${link}\n`);
+  } catch (e: any) {
+    console.error(`Error: ${e.message}`);
+    process.exit(1);
+  }
+})();

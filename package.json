@@ -1,7 +1,5 @@
 {
   "name": "proposal",
-  "module": "index.ts",
-  "type": "module",
   "private": true,
   "scripts": {
     "dev": "bun --watch index.ts",
