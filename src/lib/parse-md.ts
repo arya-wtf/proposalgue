@@ -20,9 +20,9 @@ function extractFencedBlocks(
   let match;
   while ((match = regex.exec(body)) !== null) {
     blocks.push({
-      type: match[1],
-      content: match[2],
-      fullMatch: match[0],
+      type: match[1] ?? "",
+      content: match[2] ?? "",
+      fullMatch: match[0] ?? "",
     });
   }
   return blocks;
